@@ -11,10 +11,18 @@
    <link rel="stylesheet" href="<c:url  value='css/bootstrap/css/bootstrap.min.css'/>">
    <script src="<c:url value='js/jquery-3.4.1.min.js' />"></script>
    <script src="<c:url value='css/bootstrap/js/bootstrap.min.js'/>"></script>
+   
+   <script type="text/javaScript" language="javascript" defer="defer">
+function next() {
+	location.href = "<c:url value='/egovSampleList.do'/>"
+}
+
+</script>
+   
 </head>
 <body> 
 
-	<div calss="container">
+	<div class="container">
 		<h1>메인화면</h1>
 		<div class="panel panel-default">
 
@@ -69,7 +77,7 @@
 			</div>
 			<div class="panel-footer">
 			<button type="button" class="btn btn-default"
-			onclick="add();">등록</button>
+			onclick="next();">다음</button>
 			</div>
 			
 		</div>
