@@ -85,25 +85,17 @@
 					<button type="submit" class="btn btn-success">검색</button>
 				</form>
 				<div class="table-responsive">
-					<table class="table table-hover">
-						<thead>
+					<table class="table">
 							<tr>
 								<th>게시물번호</th>
 								<th>제목</th>
-								<th>조회수</th>
-								<th>등록자</th>
-								<th>등록일</th>
+								<th>작성자</th>
 							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td><a href="javascript:view();">1</a></td>
-								<td><a href="javascript:view();">안녕하세요</a></td>
-								<td>1</td>
-								<td>관리자</td>
-								<td>2020-05-08</td>
+							<tr th:each = "list : ${NaverEconomy}">
+								<td th:text = "${list.idx}">ID</td>
+								<td th:text = "${list.title}">제목</td>
+								<td th:text = "${list.writer}">작성자</td>
 							</tr>
-						</tbody>
 					</table>
 				</div>
 			</div>
