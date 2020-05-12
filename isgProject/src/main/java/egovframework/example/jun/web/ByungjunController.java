@@ -11,4 +11,17 @@ public class ByungjunController {
 	public String junList(ModelMap model) throws Exception {
 		return "byungjun/junList";
 	}
+	
+	@RequestMapping(value = "/junMgmt.do")
+	public String mgmt(ModelMap model) throws Exception 
+	{
+		return "byungjun/junMgmt";
+	}
+	
+	@RequestMapping(value = "/junView.do")
+	public String view(ModelMap model) throws Exception 
+	{
+		return "byungjun/junView";
+	}
+	
 }

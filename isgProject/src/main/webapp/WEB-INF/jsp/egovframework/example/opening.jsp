@@ -22,13 +22,19 @@ function suho(){
 </head>
 <body>
 	<div class="container">
-		<h1>인실리코젠 BS팀 Project</h1>
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<p>버튼을 클릭하시면 해당 페이지로 이동하게 됩니다.</p>
-				<button type="button" class="btn btn-default" onclick="jun()">이병준 홈페이지</button>
-				<button type="button" class="btn btn-default" onclick="suho()">이수호 홈페이지</button>
+		<div class="text-center">
+			<h1>인실리코젠 BS팀 Project</h1>
+
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<p>버튼을 클릭하시면 해당 페이지로 이동하게 됩니다.</p>
+					<button type="button" class="btn btn-success" onclick="jun()">이병준
+						홈페이지</button>
+					<button type="button" class="btn btn-info" onclick="suho()">이수호
+						홈페이지</button>
+				</div>
 			</div>
+
 		</div>
 	</div>
 </body>
