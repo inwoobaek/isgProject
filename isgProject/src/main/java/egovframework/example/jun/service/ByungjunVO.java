@@ -1,6 +1,6 @@
 package egovframework.example.jun.service;
 
-public class ByungjunVO {
+public class ByungjunVO{
 	
 	/** ID */
 	private int idx;
