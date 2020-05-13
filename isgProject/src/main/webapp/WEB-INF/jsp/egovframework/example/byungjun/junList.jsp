@@ -77,21 +77,22 @@
 				<div class="table-responsive">
 					<table class="table table-hover">
 						<tr>
-							<td align="center"><b>게시물 번호</b></td>
-							<td align="center"><b>제목</b></td>
-							<td align="center"><b>작성자</b></td>
+							<td style="width: 15%" align="center"><b>게시물 번호</b></td>
+							<td style="width: 60%" align="center"><b>제목</b></td>
+							<td style="width: 15%" align="center"><b>작성자</b></td>
+							<td style="width: 10%" align="center"><b>페이지</b></td>
 						</tr>
 						<c:forEach var="result" items="${NaverEconomy}" varStatus="status">
-							<c:if test="${result.idx <= 20 && result.idx > 10}">
 								<tr>
-									<td align="center" class="listtd"><c:out
+									<td style="width: 15%" align="center" class="listtd"><c:out
 											value="${result.idx}" />&nbsp;</td>
-									<td align="center" class="listtd"><a
+									<td style="width: 60%" align="left" class="listtd"><a
 										href="javascript:view();"><c:out value="${result.title}" />&nbsp;</a></td>
-									<td align="center" class="listtd"><c:out
+									<td style="width: 15%" align="center" class="listtd"><c:out
 											value="${result.writer}" />&nbsp;</td>
+									<td style="width: 10%" align="center" class="listtd"><c:out
+											value="${result.page}" />&nbsp;</td>
 								</tr>
-							</c:if>
 						</c:forEach>
 					</table>
 				</div>
@@ -99,11 +100,18 @@
 
 			<div class="text-center">
 				<ul class="pagination">
+					<li class="page-item "><a class="page-link" href="#">이전</a></li>
 					<li class="page-item "><a class="page-link" href="#">1</a></li>
 					<li class="page-item "><a class="page-link" href="#">2</a></li>
 					<li class="page-item "><a class="page-link" href="#">3</a></li>
 					<li class="page-item "><a class="page-link" href="#">4</a></li>
 					<li class="page-item "><a class="page-link" href="#">5</a></li>
+					<li class="page-item "><a class="page-link" href="#">6</a></li>
+					<li class="page-item "><a class="page-link" href="#">7</a></li>
+					<li class="page-item "><a class="page-link" href="#">8</a></li>
+					<li class="page-item "><a class="page-link" href="#">9</a></li>
+					<li class="page-item "><a class="page-link" href="#">10</a></li>
+					<li class="page-item "><a class="page-link" href="#">다음</a></li>
 				</ul>
 			</div>
 

@@ -23,7 +23,7 @@ public class ByungjunCrawlingService {
 		List<ByungjunVO> byungjunVOList = new ArrayList<>();
 		int idx = 0;
 		
-		for (int i = 1; i <= 2; i++) {
+		for (int i = 1; i <= 90; i++) {
 			System.out.println("==========[" + i + "] 페이지==========\n");
 
 			// 2. HTML 가져오기(페이지 단위)
