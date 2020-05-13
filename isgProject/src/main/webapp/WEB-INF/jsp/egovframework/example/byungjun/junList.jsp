@@ -85,20 +85,24 @@
 					<button type="submit" class="btn btn-success">검색</button>
 				</form>
 				<div class="table-responsive">
-					<table class="table">
-							<tr>
-								<th>게시물번호</th>
-								<th>제목</th>
-								<th>작성자</th>
+					<table class="table table-hover">
+							<tr >
+								<td align="center"><b>게시물 번호</b></td>
+								<td align="center"><b>제목</b></td>
+								<td align="center"><b>작성자</b></td>
 							</tr>
-							<tr th:each = "list : ${NaverEconomy}">
-								<td th:text = "${list.idx}">ID</td>
-								<td th:text = "${list.title}">제목</td>
-								<td th:text = "${list.writer}">작성자</td>
-							</tr>
+							<c:forEach var="result" items="${NaverEconomy}" varStatus="status">
+								<tr>
+									<td align="center" class="listtd"><c:out value="${result.idx}"/>&nbsp;</td>
+									<td align="center" class="listtd"><c:out value="${result.title}"/>&nbsp;</td>
+									<td align="center" class="listtd"><c:out value="${result.writer}"/>&nbsp;</td>
+								</tr>
+							</c:forEach>
 					</table>
 				</div>
 			</div>
+			
+		
 			
 		</div>
 		

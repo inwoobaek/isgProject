@@ -20,7 +20,7 @@ public class ByungjunController {
 		model.addAttribute("NaverEconomy", byungjunVOList);
 		
 		/** 작동테스트 : 정상 */
-		System.out.println(byungjunVOList.toString());
+		/*System.out.println(byungjunVOList.toString());*/
 			
 		return "byungjun/junList";
 	}
