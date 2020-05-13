@@ -46,10 +46,11 @@
 </head>
 <body>
 	<div class="container">
-		<div class="text-center">
-			<h1>이병준 홈페이지</h1>
+		<div class="jumbotron text-center alert alert-success" role="alert">
+			<h2>LEE BYUNG JUN</h2>
+			<p>㈜인실리코젠 BS팀 Spring Framework Project</p>
 		</div>
-
+		
 		<div class="alert alert-success" role="alert">
 			<form class="form-inline" method="post"
 				action="<c:url value='/login.do'/>">
@@ -69,8 +70,7 @@
 				<button type="submit" class="btn btn-success"
 					onclick="return check()">로그인</button>
 			</form>
-		</div>
-
+			</div>
 
 		<div class="panel panel-default">
 			<div class="panel-body">
@@ -83,16 +83,16 @@
 							<td style="width: 10%" align="center"><b>페이지</b></td>
 						</tr>
 						<c:forEach var="result" items="${NaverEconomy}" varStatus="status">
-								<tr>
-									<td style="width: 15%" align="center" class="listtd"><c:out
-											value="${result.idx}" />&nbsp;</td>
-									<td style="width: 60%" align="left" class="listtd"><a
-										href="javascript:view();"><c:out value="${result.title}" />&nbsp;</a></td>
-									<td style="width: 15%" align="center" class="listtd"><c:out
-											value="${result.writer}" />&nbsp;</td>
-									<td style="width: 10%" align="center" class="listtd"><c:out
-											value="${result.page}" />&nbsp;</td>
-								</tr>
+							<tr>
+								<td style="width: 15%" align="center" class="listtd"><c:out
+										value="${result.idx}" />&nbsp;</td>
+								<td style="width: 60%" align="left" class="listtd"><a
+									href="javascript:view();"><c:out value="${result.title}" />&nbsp;</a></td>
+								<td style="width: 15%" align="center" class="listtd"><c:out
+										value="${result.writer}" />&nbsp;</td>
+								<td style="width: 10%" align="center" class="listtd"><c:out
+										value="${result.page}" />&nbsp;</td>
+							</tr>
 						</c:forEach>
 					</table>
 				</div>
