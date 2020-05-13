@@ -77,13 +77,13 @@
 		
 		<div class="panel panel-default">	
 			<div class="panel-body">
-				<form class="form-inline" action="/junList.do">
+				<%-- <form class="form-inline" action="/junList.do">
 					<div class="form-group">
 						<label for="searchName">제목(내용):</label> <input type="text"
 							class="form-control" id="searchName">
 					</div>
 					<button type="submit" class="btn btn-success">검색</button>
-				</form>
+				</form> --%>
 				<div class="table-responsive">
 					<table class="table table-hover">
 							<tr >
@@ -94,7 +94,7 @@
 							<c:forEach var="result" items="${NaverEconomy}" varStatus="status">
 								<tr>
 									<td align="center" class="listtd"><c:out value="${result.idx}"/>&nbsp;</td>
-									<td align="center" class="listtd"><c:out value="${result.title}"/>&nbsp;</td>
+									<td align="center" class="listtd"><a href="javascript:view();"><c:out value="${result.title}"/>&nbsp;</a></td>
 									<td align="center" class="listtd"><c:out value="${result.writer}"/>&nbsp;</td>
 								</tr>
 							</c:forEach>
