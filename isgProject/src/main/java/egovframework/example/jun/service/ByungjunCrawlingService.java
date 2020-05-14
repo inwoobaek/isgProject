@@ -22,8 +22,32 @@ public class ByungjunCrawlingService {
 		
 		List<ByungjunVO> byungjunVOList = new ArrayList<>();
 		int idx = 0;
+		int i = 1;
+		int j = 0;
+		int maxPage = 0;
 		
-		for (int i = 1; i <= 90; i++) {
+		/** 총 페이지 */
+		while(true) {
+			Document docPage = Jsoup.connect(new_URL + getParameter(i)).get();
+			Elements elePages = docPage.select(".content .paging strong");
+			
+			for(Element elePage : elePages) {
+				maxPage = Integer.parseInt(elePage.text());
+				if( maxPage == idx) {
+					j=1;
+					break;
+				}
+				idx = maxPage;
+			}
+			i++;
+			if( j == 1) {
+				break;
+			}
+		}
+		
+		/** 네이버 뉴스 경제일반 크롤링 */
+		idx = 0;
+		for (i=1; i<=maxPage; i++) {
 			System.out.println("==========[" + i + "] 페이지==========\n");
 
 			// 2. HTML 가져오기(페이지 단위)
