@@ -13,26 +13,25 @@ import egovframework.example.jun.service.ByungjunVO;
 @Controller
 public class ByungjunController {
 	
-	@RequestMapping(value = "/junList.do", method=RequestMethod.GET)
-	public String junList(ModelMap model) throws Exception {
-		
-		/** 크롤링 데이터 */
-		List<ByungjunVO> byungjunVOList = ByungjunCrawlingService.getByungjunVO();
-		model.addAttribute("NaverEconomy", byungjunVOList);
+		@RequestMapping(value = "/junList.do", method=RequestMethod.GET)
+		public String junList(ModelMap model) throws Exception {
 			
-		return "byungjun/junList";
-	}
-	
-	@RequestMapping(value = "/junMgmt.do")
-	public String mgmt(ModelMap model) throws Exception 
-	{
-		return "byungjun/junMgmt";
-	}
-	
-	@RequestMapping(value = "/junView.do")
-	public String view(ModelMap model) throws Exception 
-	{
-		return "byungjun/junView";
-	}
-	
+			/** 크롤링 데이터 */
+			List<ByungjunVO> byungjunVOList = ByungjunCrawlingService.getByungjunVO();
+			model.addAttribute("NaverEconomy", byungjunVOList);
+			
+			return "byungjun/junList";
+		}
+		
+		@RequestMapping(value = "/junMgmt.do")
+		public String mgmt(ModelMap model) throws Exception 
+		{
+			return "byungjun/junMgmt";
+		}
+		
+		@RequestMapping(value = "/junView.do")
+		public String view(ModelMap model) throws Exception 
+		{
+			return "byungjun/junView";
+		}
 }

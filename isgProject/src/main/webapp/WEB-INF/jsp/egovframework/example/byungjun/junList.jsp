@@ -120,6 +120,7 @@
 		<div class="alert alert-info" role="alert">
 			<div class="text-right">
 				<button type="button" class="btn btn-info" onclick="opening()">오프닝</button>
+				<button type="button" class="btn btn-success" onclick="">엑셀화</button>
 				<button type="button" class="btn btn-danger" onclick="add()">등록</button>
 			</div>
 		</div>
