@@ -42,6 +42,13 @@
 		}
 		return true;
 	}
+	function doExcelDownloadProcess(){
+	        var f = document.frmSearch;
+	        f.action = "/downloadExcelFile.do";
+	        f.submit();
+	        
+	        return;
+	}
 </script>
 </head>
 <body>
@@ -120,11 +127,11 @@
 		<div class="alert alert-info" role="alert">
 			<div class="text-right">
 				<button type="button" class="btn btn-info" onclick="opening()">오프닝</button>
-				<button type="button" class="btn btn-success" onclick="">엑셀화</button>
 				<button type="button" class="btn btn-danger" onclick="add()">등록</button>
+				<button type="button" class="btn btn-success" onclick="doExcelDownloadProcess()">엑셀다운로드</button>
+				<div><a href="junList.do">엑셀 다운</a> </div>
 			</div>
 		</div>
-
 	</div>
 </body>
 </html>
