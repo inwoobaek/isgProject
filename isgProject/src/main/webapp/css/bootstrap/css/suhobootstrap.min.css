@@ -5258,7 +5258,7 @@ a.badge:focus, a.badge:hover {
 }
 
 .jumbotron .h1, .jumbotron h1 {
-	color: inherit
+	color: white
 }
 
 .jumbotron p {

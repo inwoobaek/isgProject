@@ -16,7 +16,7 @@ function jun(){
 	  location.href = "<c:url value='junList.do'/>";
 }
 function suho(){
-	  location.href = "<c:url value='suhoTest.do'/>";
+	  location.href = "<c:url value='suhoList.do'/>";
 }
 </script>
 </head>

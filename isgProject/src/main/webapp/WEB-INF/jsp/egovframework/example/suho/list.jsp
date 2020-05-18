@@ -11,9 +11,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=2">
 <link rel="stylesheet"
-	href="<c:url value='/css/bootstrap/css/suhobootstrap.min.css'/>" />
+	href="<c:url value='/css/bootstrap/css/bootstrap.min.css'/>" />
 <script src="<c:url value='/js/jquery-3.4.1.min.js'/>"></script>
-<script src="<c:url value='/css/bootstrap/js/bootstrap.min.js'/>"></script>
+<script src="<c:url value='/css/bootstrap/js/suhobootstrap.min.js'/>"></script>
 
 <script type="text/javaScript" language="javascript" defer="defer">
 	$(document).ready(function() {
@@ -22,10 +22,10 @@
 		</c:if>
 	});
 	function add() {
-		location.href = "<c:url value='/suhoMgmt.do'/>"
+		location.href = "<c:url value='/mgmt.do'/>"
 	}
 	function view() {
-		location.href = "<c:url value='/suhoView.do'/>"
+		location.href = "<c:url value='/view.do'/>"
 	}
 	function setPwd(user_id) {
 		if (user_id == "admin") {
