@@ -1,5 +1,6 @@
 package egovframework.example.jun.service;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Iterator;
 import java.util.List;
@@ -69,6 +70,10 @@ public class WriteListToExcelFile {
             
         }while(iterator.hasNext());
      
+        String filePath = "C:\\";
+        File file = new File(filePath);
+    	//file을 생성할 폴더가 없으면 생성합니다.
+    	file.mkdirs();
          
         //lets write the excel data to file now
         FileOutputStream fos = new FileOutputStream(fileName);

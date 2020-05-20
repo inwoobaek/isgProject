@@ -41,13 +41,7 @@
 			return false;
 		}
 		return true;
-	}
-	function doExcelDownloadProcess(){
-	        var f = document.frmSearch;
-	        f.action = "/downloadExcelFile.do";
-	        f.submit();
-	        
-	        return;
+	
 	}
 </script>
 </head>
@@ -85,20 +79,17 @@
 					<table class="table table-hover">
 						<tr>
 							<td style="width: 15%" align="center"><b>게시물 번호</b></td>
-							<td style="width: 60%" align="center"><b>제목</b></td>
+							<td style="width: 70%" align="center"><b>제목</b></td>
 							<td style="width: 15%" align="center"><b>작성자</b></td>
-							<td style="width: 10%" align="center"><b>페이지</b></td>
 						</tr>
 						<c:forEach var="result" items="${NaverEconomy}" varStatus="status">
 							<tr>
 								<td style="width: 15%" align="center" class="listtd"><c:out
 										value="${result.idx}" />&nbsp;</td>
-								<td style="width: 60%" align="left" class="listtd"><a
+								<td style="width: 70%" align="left" class="listtd"><a
 									href="javascript:view();"><c:out value="${result.title}" />&nbsp;</a></td>
 								<td style="width: 15%" align="center" class="listtd"><c:out
 										value="${result.writer}" />&nbsp;</td>
-								<td style="width: 10%" align="center" class="listtd"><c:out
-										value="${result.page}" />&nbsp;</td>
 							</tr>
 						</c:forEach>
 					</table>
@@ -108,16 +99,16 @@
 			<div class="text-center">
 				<ul class="pagination">
 					<li class="page-item "><a class="page-link" href="#">이전</a></li>
-					<li class="page-item "><a class="page-link" href="#">1</a></li>
-					<li class="page-item "><a class="page-link" href="#">2</a></li>
-					<li class="page-item "><a class="page-link" href="#">3</a></li>
-					<li class="page-item "><a class="page-link" href="#">4</a></li>
-					<li class="page-item "><a class="page-link" href="#">5</a></li>
-					<li class="page-item "><a class="page-link" href="#">6</a></li>
-					<li class="page-item "><a class="page-link" href="#">7</a></li>
-					<li class="page-item "><a class="page-link" href="#">8</a></li>
-					<li class="page-item "><a class="page-link" href="#">9</a></li>
-					<li class="page-item "><a class="page-link" href="#">10</a></li>
+					<li class="page-item "><a class="page-link" href="?page=1">1</a></li>
+					<li class="page-item "><a class="page-link" href="?page=2">2</a></li>
+					<li class="page-item "><a class="page-link" href="?page=3">3</a></li>
+					<li class="page-item "><a class="page-link" href="?page=4">4</a></li>
+					<li class="page-item "><a class="page-link" href="?page=5">5</a></li>
+					<li class="page-item "><a class="page-link" href="?page=6">6</a></li>
+					<li class="page-item "><a class="page-link" href="?page=7">7</a></li>
+					<li class="page-item "><a class="page-link" href="?page=8">8</a></li>
+					<li class="page-item "><a class="page-link" href="?page=9">9</a></li>
+					<li class="page-item "><a class="page-link" href="?page=10">10</a></li>
 					<li class="page-item "><a class="page-link" href="#">다음</a></li>
 				</ul>
 			</div>
@@ -128,8 +119,7 @@
 			<div class="text-right">
 				<button type="button" class="btn btn-info" onclick="opening()">오프닝</button>
 				<button type="button" class="btn btn-danger" onclick="add()">등록</button>
-				<button type="button" class="btn btn-success" onclick="doExcelDownloadProcess()">엑셀다운로드</button>
-				<div><a href="junList.do">엑셀 다운</a> </div>
+				<button type="button" class="btn btn-success">엑셀다운로드</button>
 			</div>
 		</div>
 	</div>

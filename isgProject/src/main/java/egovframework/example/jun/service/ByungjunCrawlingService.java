@@ -14,47 +14,22 @@ import org.springframework.stereotype.Service;
 import egovframework.example.jun.service.ByungjunVO;
 
 @Service
-public class ByungjunCrawlingService {
+public class ByungjunCrawlingService extends Paging{
 	// 1. URL
 	private static String new_URL = "https://news.naver.com/main/list.nhn?mode=LS2D&sid2=263&sid1=101&mid=shm";
 
-	public static List<ByungjunVO> getByungjunVO() throws IOException {
+	public static List<ByungjunVO> getCrawling(int page) throws IOException {
 		
 		List<ByungjunVO> byungjunVOList = new ArrayList<>();
-		int idx = 0;
-		int i = 1;
-		int j = 0;
-		int maxPage = 0;
-		
-		/** 총 페이지 */
-		while(true) {
-			Document docPage = Jsoup.connect(new_URL + getParameter(i)).get();
-			Elements elePages = docPage.select(".content .paging strong");
-			
-			for(Element elePage : elePages) {
-				maxPage = Integer.parseInt(elePage.text());
-				if( maxPage == idx) {
-					j=1;
-					break;
-				}
-				idx = maxPage;
-			}
-			i++;
-			if( j == 1) {
-				break;
-			}
-		}
-		
+
 		/** 네이버 뉴스 경제일반 크롤링 */
-		idx = 0;
-		for (i=1; i<=maxPage; i++) {
-			System.out.println("==========[" + i + "] 페이지==========\n");
+		int idx = (page-1)*20;
 
-			// 2. HTML 가져오기(페이지 단위)
-			Document doc = Jsoup.connect(new_URL + getParameter(i)).get();
+		// 2. HTML 가져오기(페이지 단위)
+		Document doc = Jsoup.connect(new_URL + getParameter(page)).get();
 
-			// 3. Element
-			Elements contents = doc.select(".container #main_content.content ul li dl");
+		// 3. Element
+		Elements contents = doc.select(".container #main_content.content ul li dl");
 
 			for (Element content : contents) {
 				ByungjunVO byungjunVO = new ByungjunVO();
@@ -76,24 +51,12 @@ public class ByungjunCrawlingService {
 				byungjunVO.setWriter(writer.text());
 				
 				/** 페이지 */
-				byungjunVO.setPage(i);
+				byungjunVO.setPage(page);
 				
 				byungjunVOList.add(byungjunVO);
 			}
-		}
-		/** 작동테스트 : 정상 */
-		/*System.out.println(byungjunVOList.toString());*/
+		
 		return byungjunVOList;
-	}
-
-	// 페이지, 날짜 파라미터
-	public static String getParameter(int PAGE) {
-
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-		Calendar c1 = Calendar.getInstance();
-		String strToday = sdf.format(c1.getTime());
-
-		return "&date=" + strToday + "&page=" + PAGE;
 	}
 
 }

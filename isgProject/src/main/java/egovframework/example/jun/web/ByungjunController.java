@@ -5,22 +5,24 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import egovframework.example.jun.service.ByungjunCrawlingService;
 import egovframework.example.jun.service.ByungjunVO;
-import egovframework.example.jun.service.WriteListToExcelFile;
+import egovframework.example.jun.service.Paging;
 
 @Controller
-public class ByungjunController {
+public class ByungjunController extends Paging{
 	
 		@RequestMapping(value = "/junList.do", method=RequestMethod.GET)
-		public String junList(ModelMap model) throws Exception {
-	        
+		public String junList(ModelMap model, @RequestParam(value="page", defaultValue="1") int page ) throws Exception {
+			
 	        /** 크롤링 데이터 */
-			List<ByungjunVO> byungjunVOList = ByungjunCrawlingService.getByungjunVO();
+			List<ByungjunVO> byungjunVOList = ByungjunCrawlingService.getCrawling(page);
 			model.addAttribute("NaverEconomy", byungjunVOList);
 			
-			WriteListToExcelFile.writeListToFile("naver.xlsx", byungjunVOList);
+			model.addAttribute("maxPage", maxPage());
+			model.addAttribute("nowPage", page);
 			
 			return "byungjun/junList";
 		}
