@@ -13,6 +13,9 @@
 <script src="<c:url value='js/jquery-3.4.1.min.js' />"></script>
 <script src="<c:url value='css/bootstrap/js/bootstrap.min.js'/>"></script>
 <script type="text/javaScript" language="javascript" defer="defer">
+	function home() {
+		location.href = "<c:url value='/junList.do'/>";
+	}
 	function add() {
 		location.href = "<c:url value='/junMgmt.do'/>";
 	}
@@ -41,13 +44,13 @@
 			return false;
 		}
 		return true;
-	
+
 	}
 </script>
 </head>
 <body>
 	<div class="container">
-		<div class="jumbotron text-center alert alert-success" role="alert">
+		<div class="jumbotron text-center alert alert-success" role="alert" onclick="home()">
 			<h2>LEE BYUNG JUN</h2>
 			<p>㈜인실리코젠 BS팀 Spring Framework Project</p>
 		</div>
@@ -98,18 +101,21 @@
 
 			<div class="text-center">
 				<ul class="pagination">
-					<li class="page-item "><a class="page-link" href="#">이전</a></li>
-					<li class="page-item "><a class="page-link" href="?page=1">1</a></li>
-					<li class="page-item "><a class="page-link" href="?page=2">2</a></li>
-					<li class="page-item "><a class="page-link" href="?page=3">3</a></li>
-					<li class="page-item "><a class="page-link" href="?page=4">4</a></li>
-					<li class="page-item "><a class="page-link" href="?page=5">5</a></li>
-					<li class="page-item "><a class="page-link" href="?page=6">6</a></li>
-					<li class="page-item "><a class="page-link" href="?page=7">7</a></li>
-					<li class="page-item "><a class="page-link" href="?page=8">8</a></li>
-					<li class="page-item "><a class="page-link" href="?page=9">9</a></li>
-					<li class="page-item "><a class="page-link" href="?page=10">10</a></li>
-					<li class="page-item "><a class="page-link" href="#">다음</a></li>
+					<c:if test="${pageMaker.prev}">
+						<li class="page-item"><a class="page-link"
+							href="${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
+					</c:if>
+
+					<c:forEach begin="${pageMaker.startPage}"
+						end="${pageMaker.endPage}" var="idx">
+						<li class="page-item"><a class="page-link" 
+						href="${pageMaker.makeQuery(idx)}">${idx}</a></li>
+					</c:forEach>
+
+					<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+						<li class="page-item"><a class="page-link"
+							href="${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
+					</c:if>
 				</ul>
 			</div>
 
