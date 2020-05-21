@@ -32,11 +32,11 @@
 		}
 	}
 	function check() {
-		if($('#user_id').val() == '') {
+		if ($('#user_id').val() == '') {
 			alert("아이디를 입력하세요");
 			return false;
 		}
-		if($('#password').val() == '') {
+		if ($('#password').val() == '') {
 			alert("비밀번호를 확인해주세요");
 			return false;
 		}
@@ -84,8 +84,9 @@
 						<thead>
 							<tr>
 								<th>게시물 번호</th>
-								<th align="center">제목</th>
-								<th align="center">등록자</th>
+								<th>제목</th>
+								<th>등록자</th>
+								<th>등록시간</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -93,12 +94,19 @@
 								<tr>
 									<td align="center" class="listtd"><c:out
 											value="${result.idx}" />&nbsp;</td>
-									<td align="left" class="listtd"><c:out
-											value="${result.title}" />&nbsp;</td>
+									<td align="left" class="listtd"><a href="${result.href}"><c:out
+												value="${result.title}" />&nbsp;</a></td>
 									<td align="left" class="listtd"><c:out
 											value="${result.writer}" />&nbsp;</td>
+									<c:if test="${result.newdate != null}">
+										<td align="left" class="listtd"><c:out
+												value="${result.newdate}" />&nbsp;</td>
+									</c:if>
+									<c:if test="${result.outdate != null}">
+										<td align="left" class="listtd"><c:out
+												value="${result.outdate}" />&nbsp;</td>
+									</c:if>
 								</tr>
-
 							</c:forEach>
 						</tbody>
 					</table>

@@ -23,6 +23,7 @@ public class NewsCrawler {
 		int pages = 1;
 		int j = 0;
 		int maxPage = 0;
+		String url2 = null;
 
 		while (true) {
 			Document doc = Jsoup.connect(url + getUrl(pages)).get();
@@ -70,6 +71,17 @@ public class NewsCrawler {
 				// 작성자
 				Elements writer = content.select("dd .writing");
 				suhoVO.setWriter(writer.text());
+				
+				Elements href = content.select("a");
+				url2 = href.attr("href");
+				suhoVO.setHref(url2);
+				System.out.println(url2);
+				
+				Elements newdate = content.select("dd .date.is_new");
+				suhoVO.setNewdate(newdate.text());
+				
+				Elements outdate = content.select("dd .date.is_outdated");
+				suhoVO.setOutdate(outdate.text());
 
 				//페이지 넘버
 				suhoVO.setPage(pages);
