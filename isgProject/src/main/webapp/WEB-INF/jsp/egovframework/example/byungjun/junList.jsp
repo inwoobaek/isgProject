@@ -19,9 +19,6 @@
 	function add() {
 		location.href = "<c:url value='/junMgmt.do'/>";
 	}
-	function view() {
-		location.href = "<c:url value='/junView.do'/>";
-	}
 	function opening() {
 		location.href = "<c:url value='/opening.do'/>";
 	}
@@ -89,8 +86,11 @@
 							<tr>
 								<td style="width: 15%" align="center" class="listtd"><c:out
 										value="${result.idx}" />&nbsp;</td>
+										
 								<td style="width: 70%" align="left" class="listtd"><a
-									href="javascript:view();"><c:out value="${result.title}" />&nbsp;</a></td>
+									href="${view.viewQuery(result.idx)}"><c:out value="${result.title}" />&nbsp;</a></td>
+									
+				
 								<td style="width: 15%" align="center" class="listtd"><c:out
 										value="${result.writer}" />&nbsp;</td>
 							</tr>
@@ -101,20 +101,20 @@
 
 			<div class="text-center">
 				<ul class="pagination">
-					<c:if test="${pageMaker.prev}">
+					<c:if test="${paging.prev}">
 						<li class="page-item"><a class="page-link"
-							href="${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
+							href="${paging.makeQuery(paging.startPage - 1)}">이전</a></li>
 					</c:if>
 
-					<c:forEach begin="${pageMaker.startPage}"
-						end="${pageMaker.endPage}" var="idx">
+					<c:forEach begin="${paging.startPage}"
+						end="${paging.endPage}" var="idx">
 						<li class="page-item"><a class="page-link" 
-						href="${pageMaker.makeQuery(idx)}">${idx}</a></li>
+						href="${paging.makeQuery(idx)}">${idx}</a></li>
 					</c:forEach>
 
-					<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+					<c:if test="${paging.next && paging.endPage > 0}">
 						<li class="page-item"><a class="page-link"
-							href="${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
+							href="${paging.makeQuery(paging.endPage + 1)}">다음</a></li>
 					</c:if>
 				</ul>
 			</div>

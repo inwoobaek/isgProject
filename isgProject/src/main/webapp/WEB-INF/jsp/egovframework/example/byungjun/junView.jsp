@@ -24,11 +24,8 @@
 	<div class="container">
 
 	<div class="pannel pannel-primary">
-		<div class="text-center">
-			<h1>상세화면</h1>
-		</div>
-
-		<div class="alert alert-success" role="alert">
+		<div class="jumbotron text-center alert alert-success" role="alert">
+			<h2>상세화면</h2>
 			<p>해당 페이지는 상세화면 입니다.</p>
 		</div>
 

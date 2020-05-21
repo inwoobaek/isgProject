@@ -15,13 +15,14 @@ import egovframework.example.jun.service.ByungjunVO;
 
 @Service
 public class ByungjunCrawlingService extends Paging{
-	// 1. URL
+	
 	private static String new_URL = "https://news.naver.com/main/list.nhn?mode=LS2D&sid2=263&sid1=101&mid=shm";
 
-	public static List<ByungjunVO> getCrawling(int page) throws IOException {
+	/** 크롤링 */
+	public static List<ByungjunVO> getPageCrawling(int page) throws IOException {
 		
 		List<ByungjunVO> byungjunVOList = new ArrayList<>();
-
+		
 		/** 네이버 뉴스 경제일반 크롤링 */
 		int idx = (page-1)*20;
 

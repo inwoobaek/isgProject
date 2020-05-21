@@ -16,13 +16,13 @@ public class Paging {
 	private static String new_URL = "https://news.naver.com/main/list.nhn?mode=LS2D&sid2=263&sid1=101&mid=shm";
 	
 	
-	private int totalCount;
-	private int startPage;
-	private int endPage;
-	private boolean prev;
-	private boolean next;
-	private int displayPageNum = 10;
-	private Criteria cri;
+	private int totalCount; // 총 게시물
+	private int startPage; // 시작 페이지
+	private int endPage;   // 끝 페이지
+	private boolean prev;  // 이전
+	private boolean next;  // 다음
+	private int displayPageNum = 10; // 보여질 페이지목록 개수 
+	private Criteria cri; 
 
 	public void setCri(Criteria cri) {
 		this.cri = cri;
@@ -61,6 +61,7 @@ public class Paging {
 		return cri;
 	}
 
+	/** 페이지 데이터 */
 	private void calcData() {
 		endPage = (int) (Math.ceil(cri.getPage() / (double) displayPageNum) * displayPageNum);
 		startPage = (endPage - displayPageNum) + 1;
@@ -73,6 +74,7 @@ public class Paging {
 		next = endPage * cri.getPerPageNum() >= totalCount ? false : true;
 	}
 
+	/** URL */
 	public String makeQuery(int page) {
 		UriComponents uriComponents = UriComponentsBuilder.newInstance().queryParam("page", page).build();
 
