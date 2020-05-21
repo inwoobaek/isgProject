@@ -77,8 +77,12 @@ public class NewsCrawler {
 				suhoVO.setHref(url2);
 				System.out.println(url2);
 				
+				
+				
 				Elements newdate = content.select("dd .date.is_new");
+				if(newdate.text().length() > 2) {
 				suhoVO.setNewdate(newdate.text());
+				}
 				
 				Elements outdate = content.select("dd .date.is_outdated");
 				suhoVO.setOutdate(outdate.text());

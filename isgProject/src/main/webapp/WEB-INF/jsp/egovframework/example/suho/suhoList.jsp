@@ -94,18 +94,30 @@
 								<tr>
 									<td align="center" class="listtd"><c:out
 											value="${result.idx}" />&nbsp;</td>
-									<td align="left" class="listtd"><a href="${result.href}"><c:out
-												value="${result.title}" />&nbsp;</a></td>
+									<td align="left" class="listtd"><a href="${result.href}"
+										target="_blank"><c:out value="${result.title}" />&nbsp;</a></td>
 									<td align="left" class="listtd"><c:out
 											value="${result.writer}" />&nbsp;</td>
-									<c:if test="${result.newdate != null}">
+
+									<c:choose>
+										<c:when test="${result.newdate != null}">
+											<td align="left" class="listtd"><c:out
+													value="${result.newdate}" />&nbsp;</td>
+										</c:when>
+										<c:when test="${result.outdate != null}">
+											<td align="left" class="listtd"><c:out
+													value="${result.outdate}" />&nbsp;</td>
+										</c:when>
+									</c:choose>
+
+									<%-- <c:if test="${result.newdate != null}">
 										<td align="left" class="listtd"><c:out
 												value="${result.newdate}" />&nbsp;</td>
 									</c:if>
 									<c:if test="${result.outdate != null}">
 										<td align="left" class="listtd"><c:out
 												value="${result.outdate}" />&nbsp;</td>
-									</c:if>
+									</c:if> --%>
 								</tr>
 							</c:forEach>
 						</tbody>
