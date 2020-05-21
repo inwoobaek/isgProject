@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class NewsCrawler {
-	// 1. URL
+
 	private static String url = "https://news.naver.com/main/list.nhn?mode=LS2D&sid2=263&sid1=101&mid=shm&date=";
 
 	public static List<SuhoVO> getSuhoVO() throws IOException {
@@ -25,60 +25,54 @@ public class NewsCrawler {
 		int maxPage = 0;
 
 		while (true) {
-			try {
-				Document doc = Jsoup.connect(url + getUrl(pages)).get();
-				Elements elements = doc.select(".content .paging strong");
+			Document doc = Jsoup.connect(url + getUrl(pages)).get();
+			Elements elements = doc.select(".content .paging strong");
 
-				for (Element e : elements) {
-					maxPage = Integer.parseInt(e.text());
-					if (maxPage == idx) {
-						j = 1;
-						break;
-					}
-					idx = maxPage;
-				}
-				pages++;
-				if (j == 1) {
+			for (Element e : elements) {
+				maxPage = Integer.parseInt(e.text());
+				if (maxPage == idx) {
+					j = 1;
 					break;
 				}
-			} catch (IOException e) {
-				e.printStackTrace();
+				idx = maxPage;
+			}
+			pages++;
+			if (j == 1) {
+				break;
 			}
 		}
 
-		
 		idx = 0;
 		for (pages = 1; pages <= maxPage; pages++) {
 			System.out.println("==========[" + pages + "] 페이지==========\n");
 
-			// 2. HTML 가져오기(페이지 단위)
+			
 			Document doc = Jsoup.connect(url + getUrl(pages)).get();
-
-			// 3. Element
+			System.out.println(getUrl(pages));
+			
 			Elements contents = doc.select(".container #main_content.content ul li dl");
 
 			for (Element content : contents) {
 				SuhoVO suhoVO = new SuhoVO();
-
 				
 				idx++;
 				suhoVO.setIdx(idx);
 
-				
+				// 뉴스 제목
 				Elements title = content.select("dt a");
 				suhoVO.setTitle(title.text());
+				System.out.println(title.text());
 
-				
-				Elements ddcontents = content.select("dd .lede");
-				suhoVO.setView(ddcontents.text());
+				// 내용 미리보기
+				Elements view = content.select("dd .lede");
+				suhoVO.setView(view.text());
 
-				
+				// 작성자
 				Elements writer = content.select("dd .writing");
 				suhoVO.setWriter(writer.text());
 
-				
+				//페이지 넘버
 				suhoVO.setPage(pages);
-
 				suhoVOList.add(suhoVO);
 			}
 		}
@@ -88,10 +82,7 @@ public class NewsCrawler {
 	// 페이지, 날짜 파라미터
 	public static String getUrl(int PAGE) {
 		Date d = new Date();
-
 		SimpleDateFormat day = new SimpleDateFormat("yyyyMMdd");
-		// Calendar c1 = Calendar.getInstance();
-		// String strToday = day.format(c1.getTime());
 
 		return day.format(d) + "&page=" + PAGE;
 	}

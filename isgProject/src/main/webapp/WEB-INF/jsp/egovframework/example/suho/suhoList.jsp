@@ -16,11 +16,6 @@
 <script src="<c:url value='/css/bootstrap/js/bootstrap.min.js'/>"></script>
 
 <script type="text/javaScript" language="javascript" defer="defer">
-	$(document).ready(function() {
-		<c:if test = "${!empty msg}">
-			alert("${msg}");
-		</c:if>
-	});
 	function add() {
 		location.href = "<c:url value='/suhoMgmt.do'/>"
 	}
@@ -53,20 +48,21 @@
 <body>
 
 	<div class="container">
-	<div class="jumbotron text-center" style="background-color:#63bd69">
+		<div class="jumbotron text-center" style="background-color: #63bd69">
 			<h2>LEE SU HO</h2>
 			<p>㈜인실리코젠 BS팀 Spring Framework Project</p>
 		</div>
 		<div class="panel panel-default">
 
 			<div class="panel-heading">
-			<c:if test="${sessionScope.userId == null || sessionScope.userId =='' }">
-				<form class="form-inline" method="post" action="<c:url value='/login.do'/>">
+
+				<form class="form-inline" method="post"
+					action="<c:url value='/login.do'/>">
 					<div class="form-group">
 						<label for="user_id">ID:</label> <select class="form-control"
 							id="user_id" name="user_id" onchange="setPwd(this.value);">
 							<option value="">안녕하세요</option>
-							<option value="admin">관리자</option>	
+							<option value="admin">관리자</option>
 							<option value="guest">사용자</option>
 							<option value="guest2">사용자2</option>
 						</select>
@@ -78,13 +74,9 @@
 					<div class="checkbox">
 						<label><input type="checkbox"> Remember me</label>
 					</div>
-					<button type="submit" class="btn btn-default" onclick = "return check()">로그인</button>
+					<button type="submit" class="btn btn-default"
+						onclick="return check()">로그인</button>
 				</form>
-				</c:if>
-				<c:if test="${sessionScope.userId != null || sessionScope.userId !='' }">
-				  ${sessionScope.userName} = 환영합니다.
-				  <button type="button" class="btn btn-default" onclick="out();">로그아웃</button>
-				</c:if>
 			</div>
 			<div class="panel-body">
 				<div class="table-responsive">
@@ -92,20 +84,22 @@
 						<thead>
 							<tr>
 								<th>게시물 번호</th>
-								<th>제목</th>
-								<th>조회수</th>
-								<th>등록자</th>
-								<th>등록일</th>
+								<th align="center">제목</th>
+								<th align="center">등록자</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td><a href="javascript:view();">1</a></td>
-								<td><a href="javascript:view();">안녕하세요</a></td>
-								<td>1</td>
-								<td>관리자</td>
-								<td>2020-05-11</td>
-							</tr>
+							<c:forEach var="result" items="${newsList}" varStatus="status">
+								<tr>
+									<td align="center" class="listtd"><c:out
+											value="${result.idx}" />&nbsp;</td>
+									<td align="left" class="listtd"><c:out
+											value="${result.title}" />&nbsp;</td>
+									<td align="left" class="listtd"><c:out
+											value="${result.writer}" />&nbsp;</td>
+								</tr>
+
+							</c:forEach>
 						</tbody>
 					</table>
 				</div>
@@ -113,16 +107,18 @@
 					<div class="form-group">
 						<label for="id">제목(내용):</label> <input type="text"
 							class="form-control" id="searchName">
-							<button type="submit" class="btn btn-default">검색</button>
+						<button type="submit" class="btn btn-default">검색</button>
 					</div>
 				</form>
 			</div>
 			<div class="panel-footer">
 				<button type="button" class="btn btn-default" onclick="add();">등록</button>
+				<button type="button" class="btn btn-default" onclick="">엑셀
+					다운로드</button>
 			</div>
 
 		</div>
-		
+
 		<div style="text-align: center;">
 			<ul class="pagination">
 				<li><a href="#" aria-label="Previous"> <span
@@ -143,5 +139,18 @@
 			</ul>
 		</div>
 	</div>
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">WebSiteName</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="#">Home</a></li>
+				<li><a href="#">Page 1</a></li>
+				<li><a href="#">Page 2</a></li>
+				<li><a href="#">Page 3</a></li>
+			</ul>
+		</div>
+	</nav>
 </body>
 </html>
