@@ -12,18 +12,22 @@ public class ByungjunVO{
 	private String writer;
 	/** 페이지*/
 	private int page;
+	/** 링크*/
+	private String href;
 
 	public ByungjunVO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}	
-	public ByungjunVO(int idx, String title, String contents, String writer, int page) {
+
+	public ByungjunVO(int idx, String title, String contents, String writer, int page, String href) {
 		super();
 		this.idx = idx;
 		this.title = title;
 		this.contents = contents;
 		this.writer = writer;
 		this.page = page;
+		this.href = href;
 	}
 
 	public String getTitle() {
@@ -56,10 +60,17 @@ public class ByungjunVO{
 	public void setIdx(int idx) {
 		this.idx = idx;
 	}
+	public String getHref() {
+		return href;
+	}
+	public void setHref(String href) {
+		this.href = href;
+	}
 	@Override
 	public String toString() {
 		return "ByungjunVO [idx=" + idx + ", title=" + title + ", contents=" + contents + ", writer=" + writer
-				+ ", page=" + page + "]";
+				+ ", page=" + page + ", href=" + href + "]";
 	}
+	
 
 }

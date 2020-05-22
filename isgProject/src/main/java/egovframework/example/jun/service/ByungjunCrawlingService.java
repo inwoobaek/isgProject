@@ -54,6 +54,11 @@ public class ByungjunCrawlingService extends Paging{
 				/** 페이지 */
 				byungjunVO.setPage(page);
 				
+				/** 링크 */
+				Elements href = content.select("a");
+				String urlHref = href.attr("href");
+				byungjunVO.setHref(urlHref);
+
 				byungjunVOList.add(byungjunVO);
 			}
 		

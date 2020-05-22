@@ -88,7 +88,7 @@
 										value="${result.idx}" />&nbsp;</td>
 										
 								<td style="width: 70%" align="left" class="listtd"><a
-									href="${view.viewQuery(result.idx)}"><c:out value="${result.title}" />&nbsp;</a></td>
+									href="${result.href}"><c:out value="${result.title}" />&nbsp;</a></td>
 									
 				
 								<td style="width: 15%" align="center" class="listtd"><c:out
