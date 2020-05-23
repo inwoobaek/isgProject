@@ -109,15 +109,6 @@
 													value="${result.outdate}" />&nbsp;</td>
 										</c:when>
 									</c:choose>
-
-									<%-- <c:if test="${result.newdate != null}">
-										<td align="left" class="listtd"><c:out
-												value="${result.newdate}" />&nbsp;</td>
-									</c:if>
-									<c:if test="${result.outdate != null}">
-										<td align="left" class="listtd"><c:out
-												value="${result.outdate}" />&nbsp;</td>
-									</c:if> --%>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -141,21 +132,24 @@
 
 		<div style="text-align: center;">
 			<ul class="pagination">
-				<li><a href="#" aria-label="Previous"> <span
-						aria-hidden="true">&laquo;</span>
-				</a></li>
-				<li><a href="#">1</a></li>
-				<li><a href="#">2</a></li>
-				<li><a href="#">3</a></li>
-				<li><a href="#">4</a></li>
-				<li><a href="#">5</a></li>
-				<li><a href="#">6</a></li>
-				<li><a href="#">7</a></li>
-				<li><a href="#">8</a></li>
-				<li><a href="#">9</a></li>
-				<li><a href="#">10</a></li>
-				<li><a href="#" aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-				</a></li>
+				<c:if test="${pagination.prev}">
+					<li><a
+						href="${pagination.makeQuery(pagination.startPage - 1)}"
+						aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+					</a></li>
+				</c:if>
+
+				<c:forEach begin="${pagination.startPage}"
+					end="${pagination.endPage }" var="idx">
+					<li><a href="${pagination.makeQuery(idx)}">${idx}</a></li>
+				</c:forEach>
+
+
+				<c:if test="${pagination.next}">
+					<li><a href="${pagination.makeQuery(pagination.endPage + 1) }" aria-label="Next"> <span
+							aria-hidden="true">&raquo;</span>
+					</a></li>
+				</c:if>
 			</ul>
 		</div>
 	</div>

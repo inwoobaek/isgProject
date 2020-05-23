@@ -16,40 +16,20 @@ public class NewsCrawler {
 
 	private static String url = "https://news.naver.com/main/list.nhn?mode=LS2D&sid2=263&sid1=101&mid=shm&date=";
 
-	public static List<SuhoVO> getSuhoVO() throws IOException {
+	public static List<SuhoVO> getSuhoVO(int page) throws IOException {
 
 		List<SuhoVO> suhoVOList = new ArrayList<>();
-		int idx = 0;
-		int pages = 1;
-		int j = 0;
-		int maxPage = 0;
+		int idx = (page-1)*20;
+		// int j = 0;
+		// int maxPage = 0;
 		String url2 = null;
 
-		while (true) {
-			Document doc = Jsoup.connect(url + getUrl(pages)).get();
-			Elements elements = doc.select(".content .paging strong");
-
-			for (Element e : elements) {
-				maxPage = Integer.parseInt(e.text());
-				if (maxPage == idx) {
-					j = 1;
-					break;
-				}
-				idx = maxPage;
-			}
-			pages++;
-			if (j == 1) {
-				break;
-			}
-		}
-
-		idx = 0;
-		for (pages = 1; pages <= maxPage; pages++) {
+		/*for (pages = 1; pages <= maxPage; pages++) {
 			System.out.println("==========[" + pages + "] 페이지==========\n");
-
+*/
 			
-			Document doc = Jsoup.connect(url + getUrl(pages)).get();
-			System.out.println(getUrl(pages));
+			Document doc = Jsoup.connect(url + getUrl(page)).get();
+			System.out.println(getUrl(page));
 			
 			Elements contents = doc.select(".container #main_content.content ul li dl");
 
@@ -88,10 +68,10 @@ public class NewsCrawler {
 				suhoVO.setOutdate(outdate.text());
 
 				//페이지 넘버
-				suhoVO.setPage(pages);
+				suhoVO.setPage(page);
 				suhoVOList.add(suhoVO);
 			}
-		}
+			
 		return suhoVOList;
 	}
 

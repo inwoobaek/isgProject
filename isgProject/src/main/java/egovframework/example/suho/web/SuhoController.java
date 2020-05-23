@@ -9,24 +9,32 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import egovframework.example.suho.service.Criteria;
 import egovframework.example.suho.service.NewsCrawler;
+import egovframework.example.suho.service.Pagination;
 import egovframework.example.suho.service.SuhoVO;
 
 @Controller
 public class SuhoController {
 
 	@RequestMapping(value = "/suhoList.do")
-	public String suhoTest(ModelMap model) throws Exception {
+	public String suhoTest(ModelMap model, @RequestParam(value="page", defaultValue="1") int page, Criteria cri) throws Exception {
 		
-		List<SuhoVO> newsList = NewsCrawler.getSuhoVO();
+		List<SuhoVO> newsList = NewsCrawler.getSuhoVO(page);
 		model.addAttribute("newsList", newsList);
+		
+		Pagination pagination = new Pagination();
+		pagination.setCri(cri);
+		pagination.setTotalCount(pagination.getMaxPage()*20);
+		model.addAttribute("pagination", pagination);
+		
+		
 		
 		return "suho/suhoList";
 	}
 	
 	@RequestMapping(value = "/list.do")
 	public String list(ModelMap model) throws Exception {
-		
 		return "suho/list";
 	}
 	
