@@ -138,13 +138,10 @@
 						aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 					</a></li>
 				</c:if>
-
 				<c:forEach begin="${pagination.startPage}"
 					end="${pagination.endPage }" var="idx">
 					<li><a href="${pagination.makeQuery(idx)}">${idx}</a></li>
 				</c:forEach>
-
-
 				<c:if test="${pagination.next}">
 					<li><a href="${pagination.makeQuery(pagination.endPage + 1) }" aria-label="Next"> <span
 							aria-hidden="true">&raquo;</span>
