@@ -75,6 +75,7 @@ public class ByungjunCrawlingService extends Paging{
 		int idx = 0;
 
 		for(int i=0; i<5; i++) {
+			
 		// 2. HTML 가져오기(페이지 단위)
 		Document doc = Jsoup.connect(new_URL + getParameter(i)).get();
 

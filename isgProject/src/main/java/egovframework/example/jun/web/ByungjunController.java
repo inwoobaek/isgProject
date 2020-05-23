@@ -1,6 +1,5 @@
 package egovframework.example.jun.web;
 
-import java.io.IOException;
 import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import egovframework.example.jun.service.ByungjunCrawlingService;
 import egovframework.example.jun.service.ByungjunVO;
 import egovframework.example.jun.service.Criteria;
-import egovframework.example.jun.service.ExcelWrite;
 import egovframework.example.jun.service.Paging;
 
 @Controller
@@ -34,18 +32,15 @@ public class ByungjunController extends Paging {
 
 		return "byungjun/junList";
 	}
+	
+	@RequestMapping(value = "/junlistExcel.do")
+	public String junlistExcel(ModelMap model) throws Exception {
 
-	/** 엑셀다운 
-	 * @return 
-	 * @throws IOException */
-	@RequestMapping("/junList.do?excel")
-	public String excelExport(ModelMap model) throws IOException {
+		/** 크롤링 데이터 */
+		List<ByungjunVO> excelList = ByungjunCrawlingService.getExcelCrawling();
+		model.addAttribute("NaverEconomy", excelList);
 
-		/** Excel */
-		ExcelWrite excel = new ExcelWrite();
-		System.out.println("엑셀실행");
-		
-		return "byungjun/junList";
+		return "byungjun/junlistExcel";
 	}
 
 	/** 등록화면 */
