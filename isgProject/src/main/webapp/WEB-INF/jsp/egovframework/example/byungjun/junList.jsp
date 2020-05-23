@@ -22,6 +22,9 @@
 	function opening() {
 		location.href = "<c:url value='/opening.do'/>";
 	}
+	function excelDownload() {
+		location.href = "<c:url value='/junlistExcel.do'/>";
+	}
 	function setPwd(user_id) {
 		if (user_id == "admin") {
 			$('#password').val('manager');
@@ -41,17 +44,17 @@
 			return false;
 		}
 		return true;
-
 	}
 </script>
 </head>
 <body>
 	<div class="container">
-		<div class="jumbotron text-center alert alert-success" role="alert" onclick="home()">
+		<div class="jumbotron text-center alert alert-success" role="alert"
+			onclick="home()">
 			<h2>LEE BYUNG JUN</h2>
 			<p>㈜인실리코젠 BS팀 Spring Framework Project</p>
 		</div>
-		
+
 		<div class="alert alert-success" role="alert">
 			<form class="form-inline" method="post"
 				action="<c:url value='/login.do'/>">
@@ -71,30 +74,35 @@
 				<button type="submit" class="btn btn-success"
 					onclick="return check()">로그인</button>
 			</form>
-			</div>
+		</div>
 
 		<div class="panel panel-default">
 			<div class="panel-body">
 				<div class="table-responsive">
-					<table class="table table-hover">
-						<tr>
-							<td style="width: 15%" align="center"><b>게시물 번호</b></td>
-							<td style="width: 70%" align="center"><b>제목</b></td>
-							<td style="width: 15%" align="center"><b>작성자</b></td>
-						</tr>
-						<c:forEach var="result" items="${NaverEconomy}" varStatus="status">
+					<table id="table" class="table table-hover">
+						<thead>
 							<tr>
-								<td style="width: 15%" align="center" class="listtd"><c:out
-										value="${result.idx}" />&nbsp;</td>
-										
-								<td style="width: 70%" align="left" class="listtd"><a
-									href="${result.href}"><c:out value="${result.title}" />&nbsp;</a></td>
-									
-				
-								<td style="width: 15%" align="center" class="listtd"><c:out
-										value="${result.writer}" />&nbsp;</td>
+								<td style="width: 15%" align="center"><b>게시물 번호</b></td>
+								<td style="width: 70%" align="center"><b>제목</b></td>
+								<td style="width: 15%" align="center"><b>작성자</b></td>
 							</tr>
-						</c:forEach>
+						</thead>
+						<tbody>
+							<c:forEach var="result" items="${NaverEconomy}"
+								varStatus="status">
+								<tr>
+									<td style="width: 15%" align="center" class="listtd"><c:out
+											value="${result.idx}" />&nbsp;</td>
+
+									<td style="width: 70%" align="left" class="listtd"><a
+										href="${result.href}"><c:out value="${result.title}" />&nbsp;</a></td>
+
+
+									<td style="width: 15%" align="center" class="listtd"><c:out
+											value="${result.writer}" />&nbsp;</td>
+								</tr>
+							</c:forEach>
+						</tbody>
 					</table>
 				</div>
 			</div>
@@ -106,10 +114,10 @@
 							href="${paging.makeQuery(paging.startPage - 1)}">이전</a></li>
 					</c:if>
 
-					<c:forEach begin="${paging.startPage}"
-						end="${paging.endPage}" var="idx">
-						<li class="page-item"><a class="page-link" 
-						href="${paging.makeQuery(idx)}">${idx}</a></li>
+					<c:forEach begin="${paging.startPage}" end="${paging.endPage}"
+						var="idx">
+						<li class="page-item"><a class="page-link"
+							href="${paging.makeQuery(idx)}">${idx}</a></li>
 					</c:forEach>
 
 					<c:if test="${paging.next && paging.endPage > 0}">
@@ -125,7 +133,7 @@
 			<div class="text-right">
 				<button type="button" class="btn btn-info" onclick="opening()">오프닝</button>
 				<button type="button" class="btn btn-danger" onclick="add()">등록</button>
-				<button type="button" class="btn btn-success">엑셀다운로드</button>
+				<button type="button" class="btn btn-success" onclick="excelDownload()">엑셀다운로드</button>
 			</div>
 		</div>
 	</div>
