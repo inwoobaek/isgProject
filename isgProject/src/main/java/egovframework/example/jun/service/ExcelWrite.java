@@ -62,5 +62,7 @@ public class ExcelWrite extends ByungjunCrawlingService{
 		workbook.write(fileOut);
 		fileOut.close();
 		workbook.close();
+		
+		System.out.println("Excel Success");
 	}
 }

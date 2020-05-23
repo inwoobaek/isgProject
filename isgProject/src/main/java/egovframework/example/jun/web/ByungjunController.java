@@ -35,20 +35,18 @@ public class ByungjunController extends Paging {
 		return "byungjun/junList";
 	}
 
-//	/** 엑셀다운 
-//	 * @return 
-//	 * @throws IOException */
-//	@RequestMapping("/junList.do?excel")
-//	public String excelExport(ModelMap model) throws IOException {
-//
-//		/** Excel */
-//		ExcelWrite excel = new ExcelWrite();
-//		excel.getExcel();
-//		
-//		System.out.println("엑셀실행");
-//		
-//		return "byungjun/junList";
-//	}
+	/** 엑셀다운 
+	 * @return 
+	 * @throws IOException */
+	@RequestMapping("/junList.do?excel")
+	public String excelExport(ModelMap model) throws IOException {
+
+		/** Excel */
+		ExcelWrite excel = new ExcelWrite();
+		System.out.println("엑셀실행");
+		
+		return "byungjun/junList";
+	}
 
 	/** 등록화면 */
 	@RequestMapping(value = "/junMgmt.do")
