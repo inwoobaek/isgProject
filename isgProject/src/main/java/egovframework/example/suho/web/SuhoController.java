@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import egovframework.example.suho.service.Criteria;
+import egovframework.example.suho.service.ExcelTest;
 import egovframework.example.suho.service.NewsCrawler;
 import egovframework.example.suho.service.Pagination;
 import egovframework.example.suho.service.SuhoVO;
@@ -46,6 +47,15 @@ public class SuhoController {
 	@RequestMapping(value = "/suhoView.do")
 	public String view(ModelMap model) throws Exception {
 		return "suho/suhoView";
+	}
+	
+	@RequestMapping(value = "/suhoExcel.do")
+	public String excel(ModelMap model) throws Exception {
+		
+		List<SuhoVO> excelList = NewsCrawler.getExcelVO();
+		model.addAttribute("excelList", excelList);
+		
+		return "suho/suhoExcel";
 	}
 	
 }

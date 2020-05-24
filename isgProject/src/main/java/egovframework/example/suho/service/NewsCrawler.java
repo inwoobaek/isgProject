@@ -20,16 +20,12 @@ public class NewsCrawler {
 
 		List<SuhoVO> suhoVOList = new ArrayList<>();
 		int idx = (page-1)*20;
-		// int j = 0;
-		// int maxPage = 0;
+
 		String url2 = null;
 
-		/*for (pages = 1; pages <= maxPage; pages++) {
-			System.out.println("==========[" + pages + "] 페이지==========\n");
-*/
+		
 			
 			Document doc = Jsoup.connect(url + getUrl(page)).get();
-			System.out.println(getUrl(page));
 			
 			Elements contents = doc.select(".container #main_content.content ul li dl");
 
@@ -42,7 +38,6 @@ public class NewsCrawler {
 				// 뉴스 제목
 				Elements title = content.select("dt a");
 				suhoVO.setTitle(title.text());
-				System.out.println(title.text());
 
 				// 내용 미리보기
 				Elements view = content.select("dd .lede");
@@ -55,7 +50,6 @@ public class NewsCrawler {
 				Elements href = content.select("a");
 				url2 = href.attr("href");
 				suhoVO.setHref(url2);
-				System.out.println(url2);
 				
 				
 				
@@ -73,6 +67,62 @@ public class NewsCrawler {
 			}
 			
 		return suhoVOList;
+	}
+	
+	public static List<SuhoVO> getExcelVO() throws IOException {
+
+		List<SuhoVO> excelVOList = new ArrayList<>();
+		
+		int idx = 0;
+		int pages;
+		// int j = 0;
+		// int maxPage = 0;
+		String url2 = null;
+
+		for (pages = 1; pages <= 5; pages++) {
+			
+			
+			Document doc = Jsoup.connect(url + getUrl(pages)).get();
+			
+			Elements contents = doc.select(".container #main_content.content ul li dl");
+
+			for (Element content : contents) {
+				SuhoVO suhoVO = new SuhoVO();
+				
+				idx++;
+				suhoVO.setIdx(idx);
+
+				// 뉴스 제목
+				Elements title = content.select("dt a");
+				suhoVO.setTitle(title.text());
+
+				// 내용 미리보기
+				Elements view = content.select("dd .lede");
+				suhoVO.setView(view.text());
+
+				// 작성자
+				Elements writer = content.select("dd .writing");
+				suhoVO.setWriter(writer.text());
+				
+				Elements href = content.select("a");
+				url2 = href.attr("href");
+				suhoVO.setHref(url2);
+				
+				Elements newdate = content.select("dd .date.is_new");
+				if(newdate.text().length() > 2) {
+				suhoVO.setNewdate(newdate.text());
+				}
+				
+				Elements outdate = content.select("dd .date.is_outdated");
+				suhoVO.setOutdate(outdate.text());
+
+				//페이지 넘버
+				suhoVO.setPage(pages);
+				excelVOList.add(suhoVO);
+			}
+		}
+		
+		return excelVOList;
 	}
 
 	// 페이지, 날짜 파라미터

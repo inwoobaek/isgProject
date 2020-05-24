@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<title>Bootstrap Example</title>
+<title>이수호 프로젝트</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=2">
 <link rel="stylesheet"
@@ -21,6 +21,9 @@
 	}
 	function view() {
 		location.href = "<c:url value='/suhoView.do'/>"
+	}
+	function excel() {
+		location.href = "<c:url value='/suhoExcel.do'/>"
 	}
 	function setPwd(user_id) {
 		if (user_id == "admin") {
@@ -42,6 +45,55 @@
 		}
 		return true;
 	}
+	
+	function excelDown(id, title) {
+		var tab_text = '<html xmlns:x="urn:schemas-microsoft-com:office:excel">';
+		tab_text = tab_text
+				+ '<head><meta http-equiv="content-type" content="application/vnd.ms-excel; charset=UTF-8">';
+		tab_text = tab_text
+				+ '<xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>'
+		tab_text = tab_text + '<x:Name>Test Sheet</x:Name>';
+		tab_text = tab_text
+				+ '<x:WorksheetOptions><x:Panes></x:Panes></x:WorksheetOptions></x:ExcelWorksheet>';
+		tab_text = tab_text
+				+ '</x:ExcelWorksheets></x:ExcelWorkbook></xml></head><body>';
+		tab_text = tab_text + "<table border='1px'>";
+		var exportTable = $('#' + id).clone();
+		exportTable.find('input').each(function(index, elem) {
+			$(elem).remove();
+		});
+		tab_text = tab_text + exportTable.html();
+		tab_text = tab_text + '</table></body></html>';
+		var data_type = 'data:application/vnd.ms-excel';
+		var ua = window.navigator.userAgent;
+		var msie = ua.indexOf("MSIE ");
+		var fileName = title + '.xls';
+
+		// 엑셀 다운로드 IE
+		if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) {
+			if (window.navigator.msSaveBlob) {
+				var blob = new Blob([ tab_text ], {
+					type : "application/csv;charset=utf-8;"
+				});
+				navigator.msSaveBlob(blob, fileName);
+			}
+		} else {
+			var blob2 = new Blob([ tab_text ], {
+				type : "application/csv;charset=utf-8;"
+			});
+			var filename = fileName;
+			var elem = window.document.createElement('a');
+			elem.href = window.URL.createObjectURL(blob2);
+			elem.download = filename;
+			document.body.appendChild(elem);
+			elem.click();
+			document.body.removeChild(elem);
+		}
+	}
+	
+	function list() {
+		location.href = "<c:url value='/suhoList.do'/>"
+	}
 </script>
 
 </head>
@@ -54,7 +106,7 @@
 		</div>
 		<div class="panel panel-default">
 
-			<div class="panel-heading">
+			<div class="panel-heading" style="background-color: #90dd90">
 
 				<form class="form-inline" method="post"
 					action="<c:url value='/login.do'/>">
@@ -76,17 +128,24 @@
 					</div>
 					<button type="submit" class="btn btn-default"
 						onclick="return check()">로그인</button>
+					<button type="button" class="btn btn-info"
+						onclick="excelDown('table', 'NewsCrawler');">엑셀 다운로드</button>
+					<button type="button" class="btn btn-warning" onclick="excel();">엑셀
+						다운로드(최근 100개 기사)</button>
 				</form>
+
+
 			</div>
 			<div class="panel-body">
 				<div class="table-responsive">
-					<table class="table table-hover">
+					<table id="table" class="table table-hover">
 						<thead>
 							<tr>
-								<th>게시물 번호</th>
-								<th>제목</th>
-								<th>등록자</th>
-								<th>등록시간</th>
+								<th class="text-center" style="width: 5%">번호</th>
+								<th class="text-center" style="width: 35%">제목</th>
+								<th class="text-center" style="width: 40%">내용</th>
+								<th class="text-center" style="width: 10%">등록자</th>
+								<th class="text-center" style="width: 10%">등록시간</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -94,18 +153,20 @@
 								<tr>
 									<td align="center" class="listtd"><c:out
 											value="${result.idx}" />&nbsp;</td>
-									<td align="left" class="listtd"><a href="${result.href}"
+									<td align="center" class="listtd"><a href="${result.href}"
 										target="_blank"><c:out value="${result.title}" />&nbsp;</a></td>
-									<td align="left" class="listtd"><c:out
+									<td align="center" class="listtd"><c:out
+											value="${result.view}" />&nbsp;</td>
+									<td align="center" class="listtd"><c:out
 											value="${result.writer}" />&nbsp;</td>
 
 									<c:choose>
 										<c:when test="${result.newdate != null}">
-											<td align="left" class="listtd"><c:out
+											<td align="center" class="listtd"><c:out
 													value="${result.newdate}" />&nbsp;</td>
 										</c:when>
 										<c:when test="${result.outdate != null}">
-											<td align="left" class="listtd"><c:out
+											<td align="center" class="listtd"><c:out
 													value="${result.outdate}" />&nbsp;</td>
 										</c:when>
 									</c:choose>
@@ -122,10 +183,8 @@
 					</div>
 				</form>
 			</div>
-			<div class="panel-footer">
+			<div class="panel-footer" style="background-color: #90dd90">
 				<button type="button" class="btn btn-default" onclick="add();">등록</button>
-				<button type="button" class="btn btn-default" onclick="">엑셀
-					다운로드</button>
 			</div>
 
 		</div>
@@ -143,25 +202,12 @@
 					<li><a href="${pagination.makeQuery(idx)}">${idx}</a></li>
 				</c:forEach>
 				<c:if test="${pagination.next}">
-					<li><a href="${pagination.makeQuery(pagination.endPage + 1) }" aria-label="Next"> <span
-							aria-hidden="true">&raquo;</span>
+					<li><a href="${pagination.makeQuery(pagination.endPage + 1) }"
+						aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 					</a></li>
 				</c:if>
 			</ul>
 		</div>
 	</div>
-	<nav class="navbar navbar-default">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="#">WebSiteName</a>
-			</div>
-			<ul class="nav navbar-nav">
-				<li class="active"><a href="#">Home</a></li>
-				<li><a href="#">Page 1</a></li>
-				<li><a href="#">Page 2</a></li>
-				<li><a href="#">Page 3</a></li>
-			</ul>
-		</div>
-	</nav>
 </body>
 </html>
