@@ -22,6 +22,9 @@
 	function opening() {
 		location.href = "<c:url value='/opening.do'/>";
 	}
+	function view() {
+		location.href = "<c:url value='/junView.do'/>";
+	}
 	function excelDownload() {
 		location.href = "<c:url value='/junlistExcel.do'/>";
 	}
@@ -133,6 +136,7 @@
 			<div class="text-right">
 				<button type="button" class="btn btn-info" onclick="opening()">오프닝</button>
 				<button type="button" class="btn btn-danger" onclick="add()">등록</button>
+				<button type="button" class="btn btn-danger" onclick="view()">상세화면</button>
 				<button type="button" class="btn btn-success" onclick="excelDownload()">엑셀다운로드</button>
 			</div>
 		</div>

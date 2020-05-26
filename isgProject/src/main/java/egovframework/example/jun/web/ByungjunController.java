@@ -53,6 +53,7 @@ public class ByungjunController extends Paging {
 	/** 상세화면 */
 	@RequestMapping(value = "/junView.do", method = RequestMethod.GET)
 	public String view(ModelMap model) throws Exception {
+		
 		return "byungjun/junView";
 	}
 
