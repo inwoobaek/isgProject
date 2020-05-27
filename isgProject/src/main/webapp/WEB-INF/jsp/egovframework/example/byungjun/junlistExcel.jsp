@@ -3,19 +3,39 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%
+	/**
+	* @Class Name : junlistExcel.jsp
+	* @Description : Excel 다운로드 화면
+	* @Modification Information
+	*
+	*   수정일                수정자                   수정내용
+	*  -------    --------    ---------------------------
+	*  2020.05.27   이병준                 코멘트 작성
+	*
+	* author 인실리코젠 BS팀
+	* since 2020.05.27
+	*
+	*/
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- 타이틀 -->
 <title>이병준 프로젝트</title>
+<!-- 부트스트랩 -->
 <link rel="stylesheet"
 	href="<c:url  value='css/bootstrap/css/bootstrap.min.css'/>">
 <script src="<c:url value='js/jquery-3.4.1.min.js' />"></script>
 <script src="<c:url value='css/bootstrap/js/bootstrap.min.js'/>"></script>
+<!-- JS -->
 <script type="text/javaScript" language="javascript" defer="defer">
+	/* 리스트 페이지 */
 	function home() {
 		location.href = "<c:url value='/junList.do'/>";
 	}
+	/* 테이블 엑셀화 */
 	function fnExcelReport(id, title) {
 		var tab_text = '<html xmlns:x="urn:schemas-microsoft-com:office:excel">';
 		tab_text = tab_text
@@ -63,12 +83,13 @@
 </head>
 <body>
 	<div class="container">
+		<!-- 배너 -->
 		<div class="pannel pannel-primary">
 			<div class="jumbotron text-center alert alert-success" role="alert">
 				<h2>엑셀변환 화면</h2>
 				<p>엑셀 다운로드 버튼을 눌러주세요. [최근 기사 100개가 엑셀화 됩니다]</p>
 			</div>
-
+			<!-- Button -->
 			<div class="alert alert-info" role="alert">
 				<div class="text-right">
 					<button type="button" class="btn btn-danger" onclick="home()">홈</button>
@@ -76,7 +97,7 @@
 						onclick="fnExcelReport('table','title');">엑셀다운로드</button>
 				</div>
 			</div>
-
+			<!-- List -->
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<div class="table-responsive">
