@@ -129,6 +129,7 @@ public class Pagination extends Criteria {
 				break;
 			}
 		}
+		System.out.println("마지막 페이지 : " + maxPage);
 
 		return maxPage;
 	}
