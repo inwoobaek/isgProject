@@ -182,13 +182,6 @@
 						</tbody>
 					</table>
 				</div>
-				<form class="form-inline" action="/list.do">
-					<div class="form-group">
-						<label for="id">제목(내용):</label> <input type="text"
-							class="form-control" id="searchName">
-						<button type="submit" class="btn btn-default">검색</button>
-					</div>
-				</form>
 			</div>
 			<div class="panel-footer" style="background-color: #90dd90">
 				<button type="button" class="btn btn-default" onclick="add();">등록</button>
