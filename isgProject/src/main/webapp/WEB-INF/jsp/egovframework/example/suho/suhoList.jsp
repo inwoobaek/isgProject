@@ -18,7 +18,7 @@
 <script type="text/javaScript" language="javascript" defer="defer">
 	function test() {
 		location.href = "<c:url value='/test.do'/>"
-		alert("C:\\Temp 경로에 엑셀파일이 다운로드 되었습니다.");
+		alert("프로젝트 경로에 엑셀파일(testExcel.xlsx)이 다운로드 되었습니다.");
 	}
 	function add() {
 		location.href = "<c:url value='/suhoMgmt.do'/>"
@@ -49,7 +49,8 @@
 		}
 		return true;
 	}
-	
+
+	/* jsp 테이블 속성을 엑셀 파일로 다운로드 하는 메소드 */
 	function excelDown(id, title) {
 		var tab_text = '<html xmlns:x="urn:schemas-microsoft-com:office:excel">';
 		tab_text = tab_text
@@ -63,7 +64,7 @@
 				+ '</x:ExcelWorksheets></x:ExcelWorkbook></xml></head><body>';
 		tab_text = tab_text + "<table border='1px'>";
 		var exportTable = $('#' + id).clone();
-		
+
 		exportTable.find('input').each(function(index, elem) {
 			$(elem).remove();
 		});
@@ -74,7 +75,7 @@
 		var msie = ua.indexOf("MSIE ");
 		var fileName = title + '.xls';
 
-		// 엑셀 다운로드 IE
+		// 인터넷 익스플로러 사용시 엑셀 다운로드
 		if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) {
 			if (window.navigator.msSaveBlob) {
 				var blob = new Blob([ tab_text ], {
@@ -95,7 +96,7 @@
 			document.body.removeChild(elem);
 		}
 	}
-	
+
 	function list() {
 		location.href = "<c:url value='/suhoList.do'/>"
 	}
@@ -133,8 +134,8 @@
 					</div>
 					<button type="submit" class="btn btn-default"
 						onclick="return check()">로그인</button>
-					<button type="button" class="btn btn-info"
-						onclick="test();">poi 엑셀 다운로드</button>
+					<button type="button" class="btn btn-info" onclick="test();">poi
+						엑셀 다운로드</button>
 					<button type="button" class="btn btn-info"
 						onclick="excelDown('table', 'NewsCrawler');">엑셀 다운로드</button>
 					<button type="button" class="btn btn-warning" onclick="excel();">엑셀
@@ -186,9 +187,7 @@
 			<div class="panel-footer" style="background-color: #90dd90">
 				<button type="button" class="btn btn-default" onclick="add();">등록</button>
 			</div>
-
 		</div>
-
 		<div style="text-align: center;">
 			<ul class="pagination">
 				<c:if test="${pagination.prev}">

@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 
 
 public class Criteria {
-	private int page; //페이지 인덱스
-	private int perPageNum; // 페이지 행 갯수
+	private int page; //페이지 넘버
+	private int perPageNum; // 한장의 페이지에 나오는 게시물의 수
 
 	public int getPageStart() {
 		return (this.page -1) * this.perPageNum;
@@ -35,7 +35,7 @@ public class Criteria {
 		return perPageNum;
 	}
 	
-	public void setPerPageNym(int perPageNum) {
+	public void setPerPageNum(int perPageNum) {
 		if(perPageNum <= 0 || perPageNum > 100) {
 			this.perPageNum = 10;
 		}

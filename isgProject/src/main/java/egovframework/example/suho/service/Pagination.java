@@ -17,12 +17,12 @@ public class Pagination extends Criteria {
 	private Criteria cri; // page, perPageNum 초기값
 
 	private int totalCount;
-	private int startPage; // 페이지 행의 시작 번호
-	private int endPage; // 페이지 행의 끝 번호
+	private int startPage; // 보여지는 페이지의 시작 번호 (ex. 1 or 11 or 21 ...)
+	private int endPage; // 보여지는 페이지의 마지막 번호  (ex. 10 or 20 or 30 ...)
 	private boolean prev; // 이전 페이지가 있는 경우
 	private boolean next; // 다음 페이지가 있는 경우
 
-	private int displayPageNum = 10;
+	private int displayPageNum = 10; // 화면 하단에 보여지는 페이지의 수
 	private int tempEndPage;
 
 	private static String url = "https://news.naver.com/main/list.nhn?mode=LS2D&sid2=263&sid1=101&mid=shm&date=";
@@ -32,9 +32,13 @@ public class Pagination extends Criteria {
 		calcData();
 	}
 
+	
 	public void calcData() {
+		
+		//올림 함수를 이용하여 endPage를 계산
 		endPage = (int) (Math.ceil(cri.getPage() / (double) displayPageNum) * displayPageNum);
 
+		// 마지막 페이지에서 
 		startPage = (endPage - displayPageNum) + 1;
 
 		int tempEndPage = (int) (Math.ceil(totalCount / (double) cri.getPerPageNum()));
@@ -43,8 +47,11 @@ public class Pagination extends Criteria {
 		if (endPage > tempEndPage) {
 			endPage = tempEndPage;
 		}
-
-		prev = startPage == 1 ? false : true;// 1페이지면 이전 누를 수 없게 false
+		
+		// 1페이지면 이전버튼이 생성되지 않도록 
+		prev = startPage == 1 ? false : true;
+		
+		//마지막 페이지*보여지는 게시물수가 총 게시물 수보다 적거나 많을때 생성되는 경우
 		next = endPage * cri.getPerPageNum() >= totalCount ? false : true;
 
 	}
@@ -105,6 +112,7 @@ public class Pagination extends Criteria {
 		this.displayPageNum = displayPageNum;
 	}
 
+	// 마지막 페이지를 구하는 메소드
 	public int getMaxPage() throws IOException {
 
 		int idx = 0;
@@ -129,12 +137,12 @@ public class Pagination extends Criteria {
 				break;
 			}
 		}
-		System.out.println("마지막 페이지 : " + maxPage);
+		//System.out.println("마지막 페이지 : " + maxPage);
 
 		return maxPage;
 	}
-
-	// 페이지, 날짜 파라미터
+	
+	// base url에서 날짜 파라미터와 페이지넘버 파라미터를 설정하여 리턴해주는 메소드
 	public static String getUrl(int PAGE) {
 		Date d = new Date();
 		SimpleDateFormat day = new SimpleDateFormat("yyyyMMdd");
@@ -142,6 +150,7 @@ public class Pagination extends Criteria {
 		return day.format(d) + "&page=" + PAGE;
 	}
 	
+	// 쿼리 문자열을 생성해주는 메소드
 	public String makeQuery(int page) {
 		UriComponents uriComponents = UriComponentsBuilder.newInstance()
 				.queryParam("page", page).build();
